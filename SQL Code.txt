@@ -23,7 +23,7 @@ CREATE TABLE bookdetails
     book_id INT NOT NULL PRIMARY KEY,
     book_name VARCHAR(20) NOT NULL,
     author VARCHAR(20) NOT NULL,
-    no_of_books INT CHECK(no_of_books<=4)
+    no_of_books INT
 );
 
 INSERT INTO bookdetails(book_id, book_name, author, no_of_books) 

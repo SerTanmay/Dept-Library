@@ -1,18 +1,62 @@
-<html>
-<head>
-    <title>Update Books</title>
-</head>
-<body>
-    <h3>Update Books</h3>
-    <form action="updatebooks.php" method="POST">
-        Book ID: <input type="text" name="b_id">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
+
+    <title>Book Entry Update</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <form action="viewbooks.php" method="POST" class="form-signin" role="form">
+            <h2 class="form-signin-heading">View available books</h2>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Go!</button>
+      </form>
+      <form action="updatebooks.php" method="POST" class="form-signin" role="form">
+        <h2 class="form-signin-heading">Enter book details</h2>
+          
+        Book ID: <input type="text" name="b_id" class="form-control" placeholder="Book ID" required>
         <br>
-		Book Name: <input type="text" name="b_name">
+		Book Name: <input type="text" name="b_name" class="form-control" placeholder="Book Name" required>
         <br>
-        Book Author: <input type="text" name="b_author">
+        Book Author: <input type="text" name="b_author" class="form-control" placeholder="Author" required>
         <br>
-        No. of books: <input type="text" name="b_no">
+        No. of books: <input type="text" name="b_no" class="form-control" placeholder="Number of books" required>
         <br>
-        <input type="submit" name="submit" value="GO">
-	</form>
-</body>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

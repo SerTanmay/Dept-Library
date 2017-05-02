@@ -1,14 +1,46 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-	<h1>Insert New Member</h1>
-	</head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
+        
+    <title>Add New Member</title>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet">
+        
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+    </head>
 <body>
-	<form action="insertmem.php" method="POST">
-		Member ID: <input type="text" name="id">
+    <div class="container">
+	<form action="insertmem.php" method="POST" class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please enter member details</h2>
+		Member ID: <input type="text" name="id" class="form-control" placeholder="Member ID" required>
 		<br>
-		Member Name:<input type="text" name="mname">
+		Member Name:<input type="text" name="mname" class="form-control" placeholder="Member Name" required>
 		<br>
-		<input type="submit" name="submit" value="Confirm">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>
 	</form>
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
