@@ -55,7 +55,7 @@ if(!$q)
 }
 echo "<br>";
 echo '<div class="alert alert-success" id="success" role="alert">';
-echo "<strong>Entered data successfully<br></strong>";
+echo "<strong>Entered data successfully!<br></strong>";
 echo "Data entered is:";
 echo "<br>";
 echo $id;
