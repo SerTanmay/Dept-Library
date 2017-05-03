@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Administrator Login</title>
+    <title>Member Login Menu</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -64,11 +64,11 @@ if($count==1)
     session_start();
     $_SESSION['mem_id']=$username;
     if(isset($_SESSION['mem_id'])){
-        printf("mem_id is set\n");
+        //printf("mem_id is set\n");
     }
     $_SESSION['mem_name']=$password; 
     if(isset($_SESSION['mem_name'])){
-        printf("mem_name is set\n");
+        //printf("mem_name is set\n");
     }
     echo "<h3>Library Member Options:</h3><br>";
     echo '<ul><li><a href="bookissue.html">Issue book!</a></li>';

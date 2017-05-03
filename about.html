@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Book issue</title>
+    <title>About</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,8 +17,11 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
+    <!-- Custom styles for this template 
+    <link href="bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet">-->
+      
     <!-- Custom styles for this template -->
-    <link href="bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7/docs/examples/starter-template.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -30,9 +33,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
-
   <body>
+      
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -54,23 +56,22 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+      
     <div class="container">
-        <form action="viewbooks.php" method="POST" class="form-signin" role="form">
-            <h2 class="form-signin-heading">View available books</h2>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Go!</button>
-        </form>
-        <form action="bookissue.php" method="POST" class="form-signin" role="form">
-    
-            <h2 class="form-signin-heading">Please enter book details</h2>
+        <br><br>
+      <div class="starter-template">
+        <h1>About the Project</h1>
+        <p class="lead">This department library management system is made by:<br>
+        Tanmay Pereira Naik, 151105059 <br>
+        Shalakha Kulkarni, 161205009
+        <br><br>
+      </div>
 
-            Book ID: <input type="text" name="bookid" class="form-control" placeholder="Book ID" required>
-            <br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm!</button>
-        </form>
-    </div> <!-- /container -->
-
-
+    </div><!-- /.container -->
+    <script>window.jQuery || document.write('<script src="bootstrap-3.3.7/docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+        
   </body>
 </html>

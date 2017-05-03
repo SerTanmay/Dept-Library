@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Administrator Login</title>
+    <title>Book Return</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
  
 <?php
 session_start();
-$bid=$_POST['bookid'];
+$bid=$_SESSION['bookid'];
 $con1=mysqli_connect("localhost","root","","books");
 
 //Updating books database
@@ -55,7 +55,7 @@ while($row=mysqli_fetch_array($q1))
         exit();
     }
     echo '<div class="alert alert-success" id="success" role="alert">';
-    printf("Book successfully issued!\n");
+    printf("Book successfully returned!\n");
     echo "<br></div>";
 }
 session_destroy();
