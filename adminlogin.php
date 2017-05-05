@@ -54,6 +54,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    <br>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
  
