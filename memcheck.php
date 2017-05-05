@@ -63,6 +63,15 @@ session_start();
 $mid=$_SESSION['mem_id'];
 $mname=$_SESSION['mem_name'];
 $bid=$_SESSION['bookid'];
+if($bid=='terminate')
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Zero copies available!</strong>\n");
+    printf("Not possible to issue book!\n");
+    echo '<br><a href="bookissue.html">Try again</a>';
+    echo '</div><br>';
+    exit();
+}
 //Updating member database
 $con2=mysqli_connect("localhost","root","","members");
 $q2=mysqli_query($con2,"SELECT * FROM memdetails WHERE mem_id=$mid");
@@ -97,7 +106,7 @@ while($r=mysqli_fetch_array($q2))
     if (!$e2) 
     {
         echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Error at e2:</strong> %s\n</div>", mysqli_error($con));
+        printf("<strong>Error at e2:</strong> %s\n</div>", mysqli_error($con2));
         exit();
     }
     $r[2]=$r[2]+1;
@@ -112,7 +121,11 @@ while($r=mysqli_fetch_array($q2))
     printf("Book successfully issued!\n");
     echo "<br></div>";
 }
-session_destroy();
+    echo '<ul>
+        <li><a href="check_user-pass.html">Log in again</li>
+        <li><a href="memlogout.php">Member Logout</li>
+        </ul>';
+        
 ?>
     </body>
 </html>

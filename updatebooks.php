@@ -53,7 +53,7 @@
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </nav>S
+    </nav><br>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
@@ -81,7 +81,10 @@ while($row=mysqli_fetch_array($q))
     echo "<strong>Edit successful!</strong>";
     echo "<br></div>";
 }
-session_destroy();
+echo '<ul>
+        <li><a href="adminlogin.html">Log in again</li>
+        <li><a href="adminlogout.php">Log out</li>
+        </ul>';
 ?>
          </body>
 </html>

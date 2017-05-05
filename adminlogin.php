@@ -87,8 +87,8 @@ $count=mysqli_num_rows($result);
 if($count==1)
 {
     session_start();
-    $_SESSION['mem_id']=$username;
-    $_SESSION['mem_pass']=$password;
+    $_SESSION['admin_id']=$username;
+    $_SESSION['admin_pass']=$password;
     echo '<div class="alert alert-success" id="success" role="alert">';
     echo "<strong>Login Successful!</strong>";
 	echo "<br></div>";
@@ -103,7 +103,7 @@ else
 {
     echo '<div class="alert alert-danger" role="alert">';
     echo "<strong>Wrong Username or Password</strong>";
-    echo " Try again</div>";
+    echo ' <a href="adminlogin.html">Try again</a></div>';
     return false;
 }
 ?>

@@ -72,7 +72,9 @@ if (!$q)
 echo '<div class="alert alert-success" id="success" role="alert">';
 echo "<strong>Delete successful!</strong>";
 echo "<br></div>";
-session_destroy();
-?>
+echo '<ul>
+        <li><a href="adminlogin.html">Log in again</li>
+        <li><a href="adminlogout.php">Log out</li>
+        </ul>';?>
     </body>
 </html>

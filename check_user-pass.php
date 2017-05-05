@@ -99,7 +99,7 @@ else
 {
     echo '<div class="alert alert-danger" role="alert">';
     echo "<strong>Wrong Username or Password</strong>";
-    echo " Try again</div>";
+    echo ' <a href="check_user-pass.html">Try again</a></div>';
     return false;
 }
 ?>
