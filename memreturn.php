@@ -86,6 +86,7 @@ session_start();
 $mid=$_SESSION['mem_id'];
 $mname=$_SESSION['mem_name'];
 $bid=$_SESSION['bookid'];
+$today= date('d-m-Y ');     //today's date
 if($bid=='terminate')
 {
     echo '<div class="alert alert-danger" role="alert">';
@@ -97,7 +98,24 @@ if($bid=='terminate')
 }
 //Updating member database
 $con2=mysqli_connect("localhost","root","","members");
-$q3="DELETE FROM memborrow WHERE mem_id=$mid AND book_id=$bid";
+$q1=mysqli_query($con2,"SELECT * FROM memborrow WHERE mem_id=$mid AND book_id=$bid");
+$row=mysqli_fetch_array($q1);
+    $date=$row['return_date'];          			//expected return_date
+
+	$ts1 = strtotime($today);
+	$ts2 = strtotime($date);
+
+	$seconds_diff = $ts1 - $ts2;    				//stores seconds
+	$result=$seconds_diff/86400;					//dividing by 86400sec = 1 day
+	//echo $result;									//stores no of days
+
+if($result>0)
+{   
+        $_SESSION['late']=$result;
+        header('Location: latesubmit.php');
+        exit();
+}        
+$q3=mysqli_query($con2,"DELETE FROM memborrow WHERE (mem_id=$mid AND book_id=$bid)");
     if (!$q3) 
     {
         echo '<div class="alert alert-danger" role="alert">';
@@ -106,8 +124,7 @@ $q3="DELETE FROM memborrow WHERE mem_id=$mid AND book_id=$bid";
         exit();
     }
 $q2=mysqli_query($con2,"SELECT * FROM memdetails WHERE mem_id=$mid");
-while($r=mysqli_fetch_array($q2))
-{
+$r=mysqli_fetch_array($q2);
     $r[4]=$r[4]-1;
     $e3=mysqli_query($con2,"UPDATE memdetails SET books_issued='$r[4]' WHERE mem_id=$mid");
     if (!$e3) 
@@ -119,11 +136,11 @@ while($r=mysqli_fetch_array($q2))
     echo '<div class="alert alert-success" id="success" role="alert">';
     printf("Book successfully returned!\n");
     echo '</div><br>';
-}
-        echo '<ul>
-        <li><a href="memloginmenu.php">Member Menu</li>
-        <li><a href="memlogout.php">Member Logout</li>
-        </ul>';
+
+echo '<ul>
+    <li><a href="memloginmenu.php">Member Menu</li>
+    <li><a href="memlogout.php">Member Logout</li>
+      </ul>';
         
 ?>
     </body>

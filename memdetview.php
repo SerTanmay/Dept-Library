@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
-        
-    <title>Add New Member</title>
-    
+
+    <title>View Books</title>
+
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-        
+
+    <script>
+        function goBack() 
+        {
+            window.history.back();
+        }
+    </script>
+    <style>
+        body {
+            padding: 40px 15px;
+            text-align: center;
+            background-color: #eee;
+        }
+        table.center {
+            margin-left:55%; 
+            margin-right:35%;
+        }
+    </style>  
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-        
+
     <!-- Custom styles for this template -->
     <link href="bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet">
-        
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js"></script>
@@ -27,9 +45,11 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->    
-    </head>
-<body>
+    <![endif]-->
+  </head>
+    
+    <body>
+        
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -51,21 +71,48 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container">
-	<form action="insertmem.php" method="POST" class="form-signin" role="form">
-        <h2 class="form-signin-heading">Please enter member details</h2><br>
-		Member ID: <input type="text" name="id" class="form-control" placeholder="Member ID" required>
-		<br>
-		Member Name:<input type="text" name="mname" class="form-control" placeholder="Member Name" required>
-		<br>
-        Phone No.:<input type="text" name="mphone" class="form-control" placeholder="Phone Number" required>
-        <br>
-        Email:<input type="email" name="memail" class="form-control" placeholder="Email address" required>
-        <br>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>
-	</form>
-    </div> <!-- /container -->
+    <h2>  Library Books Database</h2>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-</body>
+
+<?php
+session_start();
+$con=mysqli_connect("localhost","root","","books");
+if(! $con )
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    die("<strong>Could not connect:</strong> " . mysqli_connect_error());
+    echo "<br></div>";
+} 
+$q=mysqli_query($con,"CREATE OR REPLACE VIEW books_view AS SELECT * FROM bookdetails ORDER BY book_name ASC,book_id ASC");
+if (!$q) 
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error at create view:</strong> %s\n</div>", mysqli_error($con));
+    exit();
+}
+$c=mysqli_query($con,"SELECT * FROM books_view");
+echo '<div class="col-md-6">
+          <table class="table center table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Available</th>
+              </tr>
+            </thead>
+            <tbody>';
+while($row=mysqli_fetch_array($c))
+{
+    echo '<tr><td>'.$row[0].'</td><td>'.$row[1].'</td><td>'.$row[2].'</td><td>'.$row[3].'</td></tr>';
+}
+echo '      </tbody>
+          </table>
+        </div>
+      </div>';
+echo '<button class="btn btn-lg btn-primary btn-block" onclick="goBack()">Back!</button>';
+
+?>
+    </body>
 </html>

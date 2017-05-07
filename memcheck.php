@@ -72,9 +72,11 @@ if($bid=='terminate')
     echo '</div><br>';
     exit();
 }
+$date= date('d-m-Y ');
+$return_date=Date('d-m-Y', strtotime("+15 days"));
 //Updating member database
 $con2=mysqli_connect("localhost","root","","members");
-$q2=mysqli_query($con2,"INSERT INTO memborrow VALUES ('{$mid}','{$bid}')");
+$q2=mysqli_query($con2,"INSERT INTO memborrow VALUES ('{$mid}','{$bid}','$date','$return_date')");
     if (!$q2) 
     {
         echo '<div class="alert alert-danger" role="alert">';
