@@ -29,6 +29,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+    </style>
   </head>
     
     <body>
@@ -84,49 +86,42 @@ session_start();
 $mid=$_SESSION['mem_id'];
 $mname=$_SESSION['mem_name'];
 $bid=$_SESSION['bookid'];
+if($bid=='terminate')
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error!</strong>\n");
+    printf("Book not in database!\n");
+    echo '<br><a href="bookreturn.html">Try again</a>';
+    echo '</div><br>';
+    exit();
+}
 //Updating member database
 $con2=mysqli_connect("localhost","root","","members");
+$q3="DELETE FROM memborrow WHERE mem_id=$mid AND book_id=$bid";
+    if (!$q3) 
+    {
+        echo '<div class="alert alert-danger" role="alert">';
+        printf("<strong>Error at q3:</strong> %s\n", mysqli_error($con2));
+        echo '</div><br>';
+        exit();
+    }
 $q2=mysqli_query($con2,"SELECT * FROM memdetails WHERE mem_id=$mid");
 while($r=mysqli_fetch_array($q2))
 {
-    if($r[3]==$bid)
-    {
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid1=NULL WHERE mem_id=$mid");
-    }
-    else if($r[4]==$bid)
-    {
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid2=NULL WHERE mem_id=$mid");
-    }
-    else if($r[5]==$bid)
-    {
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid3=NULL WHERE mem_id=$mid");
-    }
-    else if($r[6]==$bid)
-    {
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid3=NULL WHERE mem_id=$mid");
-    }
-    else
+    $r[4]=$r[4]-1;
+    $e3=mysqli_query($con2,"UPDATE memdetails SET books_issued='$r[4]' WHERE mem_id=$mid");
+    if (!$e3) 
     {
         echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Book not issued by you!</strong> Exiting!\n");
-        echo '</div><br>';
+        printf("<strong>Error at e3:</strong> %s\n</div>", mysqli_error($con));
         exit();
     }
-    if (!$e2) 
-    {
-        echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Error at e2:</strong> %s\n", mysqli_error($con2));
-        echo '</div><br>';
-        exit();
-    }
-    $r[2]=$r[2]-1;
-    $e3=mysqli_query($con2,"UPDATE memdetails SET books_issued='$r[2]' WHERE mem_id=$mid");
     echo '<div class="alert alert-success" id="success" role="alert">';
     printf("Book successfully returned!\n");
     echo '</div><br>';
 }
         echo '<ul>
-        <li><a href="check_user-pass.html">Log in again</li>
+        <li><a href="memloginmenu.php">Member Menu</li>
         <li><a href="memlogout.php">Member Logout</li>
         </ul>';
         

@@ -69,7 +69,7 @@ if(! $con )
 }    
 $id=$_POST['id'];
 $name=$_POST['mname'];
-$q=mysqli_query($con,"INSERT INTO memdetails (mem_id,mem_name)VALUES ('{$id}','{$name}')");
+$q=mysqli_query($con,"INSERT INTO memdetails (mem_id,mem_name) VALUES ('{$id}','{$name}')");
 if(!$q)
 {
 	die('Could not enter data: ' . mysqli_error( $con ));

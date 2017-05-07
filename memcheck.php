@@ -66,7 +66,7 @@ $bid=$_SESSION['bookid'];
 if($bid=='terminate')
 {
     echo '<div class="alert alert-danger" role="alert">';
-    printf("<strong>Zero copies available!</strong>\n");
+    printf("<strong>Book not available!</strong>\n");
     printf("Not possible to issue book!\n");
     echo '<br><a href="bookissue.html">Try again</a>';
     echo '</div><br>';
@@ -74,43 +74,25 @@ if($bid=='terminate')
 }
 //Updating member database
 $con2=mysqli_connect("localhost","root","","members");
-$q2=mysqli_query($con2,"SELECT * FROM memdetails WHERE mem_id=$mid");
-while($r=mysqli_fetch_array($q2))
+$q2=mysqli_query($con2,"INSERT INTO memborrow VALUES ('{$mid}','{$bid}')");
+    if (!$q2) 
+    {
+        echo '<div class="alert alert-danger" role="alert">';
+        printf("<strong>Error at q2:</strong> %s\n</div>", mysqli_error($con2));
+        exit();
+    }
+$q3=mysqli_query($con2,"SELECT * FROM memdetails WHERE mem_id=$mid");
+while($r=mysqli_fetch_array($q3))
 {
-    if($r[3]==NULL)
-    {
-        $r[3]=$bid;
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid1='$r[3]' WHERE mem_id=$mid");
-    }
-    else if($r[4]==NULL)
-    {
-        $r[4]=$bid;
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid2='$r[4]' WHERE mem_id=$mid");
-    }
-    else if($r[5]==NULL)
-    {
-        $r[5]=$bid;
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid3='$r[5]' WHERE mem_id=$mid");
-    }
-    else if($r[6]==NULL)
-    {
-        $r[6]=$bid;
-        $e2=mysqli_query($con2,"UPDATE memdetails SET bid4='$r[6]' WHERE mem_id=$mid");
-    }
-    else
+    if ($r['books_issued']>=4)
     {
         echo '<div class="alert alert-danger" role="alert">';
         printf("Max books already issued! Exiting!\n");
         exit();
     }
-    if (!$e2) 
-    {
-        echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Error at e2:</strong> %s\n</div>", mysqli_error($con2));
-        exit();
-    }
-    $r[2]=$r[2]+1;
-    $e3=mysqli_query($con2,"UPDATE memdetails SET books_issued='$r[2]' WHERE mem_id=$mid");
+    
+    $r[4]=$r[4]+1;
+    $e3=mysqli_query($con2,"UPDATE memdetails SET books_issued='$r[4]' WHERE mem_id=$mid");
     if (!$e3) 
     {
         echo '<div class="alert alert-danger" role="alert">';
@@ -122,7 +104,7 @@ while($r=mysqli_fetch_array($q2))
     echo "<br></div>";
 }
     echo '<ul>
-        <li><a href="check_user-pass.html">Log in again</li>
+        <li><a href="memloginmenu.php">Member Menu</li>
         <li><a href="memlogout.php">Member Logout</li>
         </ul>';
         

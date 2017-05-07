@@ -92,12 +92,7 @@ if($count==1)
     echo '<div class="alert alert-success" id="success" role="alert">';
     echo "<strong>Login Successful!</strong>";
 	echo "<br></div>";
-    echo "<h3>Library Administrator Options:</h3><br>";
-    echo '<ul><li><a href="insertmem.html">Add member</a></li>';
-    echo '<li><a href="insertbooks.html">Add book</a></li>';
-    echo '<li><a href="updatebooks.html">Update book details</a></li>';
-    echo '<li><a href="deletebooks.html">Delete book record</a></li>';
-    echo '</ul>';
+    header('Location: adminloginmenu.php');
 }
 else
 {
