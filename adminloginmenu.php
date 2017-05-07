@@ -77,6 +77,8 @@
         <li><a href="insertbooks.html">Add book</a></li>
         <li><a href="updatebooks.html">Update book details</a></li>
         <li><a href="deletebooks.html">Delete book record</a></li>
+        <li><a href="latefeeconfirm.html">Late Fee Return</a></li>
+        <li><a href="memdetview.php">Member Records</a></li>
     </ol>
     </body>
 </html>

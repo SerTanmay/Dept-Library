@@ -71,41 +71,62 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <h2>  Library Books Database</h2>
+    <h2>Members Borrow Details</h2>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 <?php
 session_start();
-$con=mysqli_connect("localhost","root","","books");
+$con=mysqli_connect("localhost","root","","members");
 if(! $con )
 {
     echo '<div class="alert alert-danger" role="alert">';
     die("<strong>Could not connect:</strong> " . mysqli_connect_error());
     echo "<br></div>";
 } 
-$q=mysqli_query($con,"CREATE OR REPLACE VIEW books_view AS SELECT * FROM bookdetails ORDER BY book_name ASC,book_id ASC");
+$sql="CREATE OR REPLACE VIEW mem_view AS 
+SELECT memdetails.mem_id,memdetails.mem_name,memborrow.book_id,memborrow.borrow_date,memborrow.return_date
+FROM memdetails, memborrow
+WHERE memdetails.mem_id=memborrow.mem_id";
+$q=mysqli_query($con,$sql);
 if (!$q) 
 {
     echo '<div class="alert alert-danger" role="alert">';
     printf("<strong>Error at create view:</strong> %s\n</div>", mysqli_error($con));
     exit();
 }
-$c=mysqli_query($con,"SELECT * FROM books_view");
+$c=mysqli_query($con,"SELECT * FROM mem_view");
+if (!$c) 
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error at select from view:</strong> %s\n</div>", mysqli_error($con));
+    exit();
+}
 echo '<div class="col-md-6">
           <table class="table center table-striped table-bordered">
             <thead>
               <tr>
+                <th>Member ID</th>
+                <th>Member Name</th>
                 <th>Book ID</th>
-                <th>Book Name</th>
-                <th>Author</th>
-                <th>Available</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
               </tr>
             </thead>
             <tbody>';
 while($row=mysqli_fetch_array($c))
 {
-    echo '<tr><td>'.$row[0].'</td><td>'.$row[1].'</td><td>'.$row[2].'</td><td>'.$row[3].'</td></tr>';
+    if (!$row) 
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error at fetch array:</strong> %s\n</div>", mysqli_error($con));
+    exit();
+}
+    echo '<tr><td>'.$row[0].'</td>
+    <td>'.$row[1].'</td>
+    <td>'.$row[2].'</td>
+    <td>'.$row[3].'</td>
+    <td>'.$row[4].'</td></tr>';
 }
 echo '      </tbody>
           </table>
