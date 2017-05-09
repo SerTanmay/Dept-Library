@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
     <script type="text/javascript">
-        window.location.href = "memreturn.php"
+        window.location.href = "latefeememreturn.php"
     </script>
 
     <title>Book Return</title>
@@ -25,8 +25,9 @@ $con1=mysqli_connect("localhost","root","","books");
 
 //Updating books database
 $q1=mysqli_query($con1,"SELECT * FROM bookdetails WHERE book_id=$bid");
-if(!q1)
+if(!$q1)
 {
+    echo 'Wrong book id';
     $bid='terminate';
     $_SESSION['bookid']=$bid;
     exit();
@@ -42,6 +43,7 @@ while($row=mysqli_fetch_array($q1))
         exit();
     }
     printf("Book db update success!\n");
+    echo '<a href="latefeememreturn.php">Continue!</a>';
     echo '<br>';
 }
 $_SESSION['bookid']=$bid;

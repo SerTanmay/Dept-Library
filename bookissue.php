@@ -11,12 +11,9 @@
     <script type="text/javascript">
         window.location.href = "memcheck.php"
     </script>
-
     <title>Book Issue</title>
-  </head>
-    
+  </head>  
     <body>
-
 <?php
 session_start();
 $bid=$_POST['bookid'];
@@ -42,8 +39,7 @@ while($row=mysqli_fetch_array($q1))
     }
     echo '<div class="alert alert-success" id="success" role="alert">';
     printf("Book db update success!\n");
-    echo '</div><br>';
-    
+    echo '</div><br>'; 
 }
 $_SESSION['bookid']=$bid;
 ?>

@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>View Books</title>
+    <title>View Members Borrow Details</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -85,7 +85,7 @@ if(! $con )
     echo "<br></div>";
 } 
 $sql="CREATE OR REPLACE VIEW mem_view AS 
-SELECT memdetails.mem_id,memdetails.mem_name,memborrow.book_id,memborrow.borrow_date,memborrow.return_date
+SELECT memdetails.mem_id,mem_name,book_id,borrow_date,return_date
 FROM memdetails, memborrow
 WHERE memdetails.mem_id=memborrow.mem_id";
 $q=mysqli_query($con,$sql);

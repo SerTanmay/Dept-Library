@@ -27,7 +27,14 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->    
+    <![endif]--> 
+    <style>
+        body {
+            padding: 40px 15px;
+            text-align: center;
+            background-color: #eee;
+        }
+    </style>
     </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -51,9 +58,15 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    <h1>Late Fee Confirmation</h1>
     <div class="container">
+    <form action="memdetview.php" method="POST" class="form-signin" role="form">
+            
+        <h2 class="form-signin-heading">View members' borrow details</h2>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Go!</button>
+    </form>
 	<form action="latefeeconfirm.php" method="POST" class="form-signin" role="form">
-        <h1>Late Fee Confirmation</h1>
+        
         <h2 class="form-signin-heading">Please enter details</h2><br>
         <p>Please ensure that late fees have already been paid</p>
 		Member ID: <input type="text" name="mid" class="form-control" placeholder="Member ID" required>
