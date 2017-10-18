@@ -69,10 +69,14 @@ if(! $con )
 }    
 $id=$_POST['id'];
 $name=$_POST['mname'];
-$q=mysqli_query($con,"INSERT INTO memdetails (mem_id,mem_name)VALUES ('{$id}','{$name}')");
+$phone=$_POST['mphone'];
+$email=$_POST['memail'];
+$q=mysqli_query($con,"INSERT INTO memdetails (mem_id,mem_name,mem_email,mem_phone) VALUES ('{$id}','{$name}','{$email}','{$phone}')");
 if(!$q)
 {
-	die('Could not enter data: ' . mysqli_error( $con ));
+	echo '<div class="alert alert-danger" role="alert">';
+    die('<strong>Could not enter data: </strong>' . mysqli_error( $con ));
+    echo '</div><br>';
 }
 echo "<br>";
 echo '<div class="alert alert-success" id="success" role="alert">';

@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Member Login Menu</title>
+    <title>Member Login Validation</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -91,9 +91,7 @@ if($count==1)
     if(isset($_SESSION['mem_name'])){
         //printf("mem_name is set\n");
     }
-    echo "<h3>Library Member Options:</h3><br>";
-    echo '<ul><li><a href="bookissue.html">Issue book!</a></li>';
-    echo '<li><a href="bookreturn.html">Return book!</a></li>';
+    header('Location: memloginmenu.php');
 }
 else
 {

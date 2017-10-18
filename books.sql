@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2017 at 02:12 PM
+-- Generation Time: May 07, 2017 at 08:17 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,30 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `books`
 --
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `bookdetails`
 --
-
+USE books;
 CREATE TABLE `bookdetails` (
   `book_id` int(11) NOT NULL,
-  `book_name` varchar(20) NOT NULL,
+  `book_name` varchar(30) NOT NULL,
   `author` varchar(20) NOT NULL,
-  `no_of_books` int(11) DEFAULT NULL
+  `avail` varchar(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bookdetails`
 --
 
-INSERT INTO `bookdetails` (`book_id`, `book_name`, `author`, `no_of_books`) VALUES
-(1, 'Intro to Algorithms', 'Tanmay', 2),
-(2, 'C++ How To', 'Deitel', 3),
-(3, 'SAD', 'Awad', 3),
-(45, 'OOPD in C++', 'Lafore', 8),
-(23, 'EM', 'Cooper', 5);
+INSERT INTO `bookdetails` (`book_id`, `book_name`, `author`, `avail`) VALUES
+(1, 'Intro to Algorithms', 'CLRS', 'YES'),
+(2, 'C++ How To', 'Deitel', 'YES'),
+(3, 'SAD', 'Awad', 'YES'),
+(45, 'OOPD in C++', 'Lafore', 'YES'),
+(23, 'EM', 'Cooper', 'YES');
 
 -- --------------------------------------------------------
 
@@ -51,10 +50,6 @@ INSERT INTO `bookdetails` (`book_id`, `book_name`, `author`, `no_of_books`) VALU
 -- (See below for the actual view)
 --
 CREATE TABLE `books_view` (
-`book_id` int(11)
-,`book_name` varchar(20)
-,`author` varchar(20)
-,`no_of_books` int(11)
 );
 
 -- --------------------------------------------------------

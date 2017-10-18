@@ -9,11 +9,28 @@
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Book Issue</title>
+    <title>View Member Borrow details</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script>
+        function goBack() 
+        {
+            window.history.back();
+        }
+    </script>
+    <style>
+        body {
+            padding: 40px 15px;
+            text-align: center;
+            background-color: #eee;
+        }
+        table.center {
+            margin-left:55%; 
+            margin-right:35%;
+        }
+    </style>  
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
@@ -32,6 +49,7 @@
   </head>
     
     <body>
+        
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -53,62 +71,71 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <br>
+    <h2>Members Borrow Details</h2>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
- 
+
 <?php
-//memcheck.php
 session_start();
-$mid=$_SESSION['mem_id'];
-$mname=$_SESSION['mem_name'];
-$bid=$_SESSION['bookid'];
-if($bid=='terminate')
+$memid=$_SESSION['mem_id'];        
+$con=mysqli_connect("localhost","root","","members");
+if(! $con )
 {
     echo '<div class="alert alert-danger" role="alert">';
-    printf("<strong>Book not available!</strong>\n");
-    printf("Not possible to issue book!\n");
-    echo '<br><a href="bookissue.html">Try again</a>';
-    echo '</div><br>';
+    die("<strong>Could not connect:</strong> " . mysqli_connect_error());
+    echo "<br></div>";
+} 
+$sql="CREATE OR REPLACE VIEW mem_view AS 
+SELECT memdetails.mem_id,memdetails.mem_name,memborrow.book_id,memborrow.borrow_date,memborrow.return_date
+FROM memdetails, memborrow
+WHERE memdetails.mem_id=memborrow.mem_id='{$memid}'";
+$q=mysqli_query($con,$sql);
+if (!$q) 
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error at create view:</strong> %s\n</div>", mysqli_error($con));
     exit();
 }
-$date= date('d-m-Y ');
-$return_date=Date('d-m-Y', strtotime("+15 days"));
-//Updating member database
-$con2=mysqli_connect("localhost","root","","members");
-$q2=mysqli_query($con2,"INSERT INTO memborrow VALUES ('{$mid}','{$bid}','$date','$return_date')");
-    if (!$q2) 
-    {
-        echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Error at q2:</strong> %s\n</div>", mysqli_error($con2));
-        exit();
-    }
-$q3=mysqli_query($con2,"SELECT * FROM memdetails WHERE mem_id=$mid");
-while($r=mysqli_fetch_array($q3))
+$c=mysqli_query($con,"SELECT * FROM mem_view");
+if (!$c) 
 {
-    if ($r['books_issued']>=4)
-    {
-        echo '<div class="alert alert-danger" role="alert">';
-        printf("Max books already issued! Exiting!\n");
-        exit();
-    }
-    $r[4]=$r[4]+1;
-    $e3=mysqli_query($con2,"UPDATE memdetails SET books_issued='$r[4]' WHERE mem_id=$mid");
-    if (!$e3) 
-    {
-        echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Error at e3:</strong> %s\n</div>", mysqli_error($con));
-        exit();
-    }
-    echo '<div class="alert alert-success" id="success" role="alert">';
-    printf("Book successfully issued!\n");
-    echo "<br></div>";
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error at select from view:</strong> %s\n</div>", mysqli_error($con));
+    exit();
 }
-    echo '<ul>
-        <li><a href="memloginmenu.php">Member Menu</li>
-        <li><a href="memlogout.php">Member Logout</li>
-        </ul>';
-        
+echo '<div class="col-md-6">
+          <table class="table center table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>Book ID</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+              </tr>
+            </thead>
+            <tbody>';
+while($row=mysqli_fetch_array($c))
+{
+if (!$row) 
+{
+    echo '<div class="alert alert-danger" role="alert">';
+    printf("<strong>Error at fetch array:</strong> %s\n</div>", mysqli_error($con));
+    exit();
+}
+    echo '<tr>
+    <td>'.$row[0].'</td>
+    <td>'.$row[1].'</td>
+    <td>'.$row[2].'</td>
+    <td>'.$row[3].'</td>
+    <td>'.$row[4].'</td></tr>';
+}
+echo '      </tbody>
+          </table>
+        </div>
+      </div>';
+echo '<button class="btn btn-lg btn-primary btn-block" onclick="goBack()">Back!</button>';
+
 ?>
     </body>
 </html>

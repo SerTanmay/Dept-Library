@@ -65,8 +65,8 @@ $con=mysqli_connect("localhost","root","","books");
 $id=$_POST['b_id'];
 $name=$_POST['b_name'];
 $author=$_POST['b_author'];
-$no=$_POST['b_no'];
-$sql="INSERT INTO bookdetails VALUES ('{$id}','{$name}','{$author}','{$no}')";
+$sql="INSERT INTO bookdetails (book_id,book_name,author)
+VALUES ('{$id}','{$name}','{$author}')";
 $q=mysqli_query($con,$sql);
 if (!$q) 
 {

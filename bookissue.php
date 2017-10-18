@@ -11,12 +11,9 @@
     <script type="text/javascript">
         window.location.href = "memcheck.php"
     </script>
-
     <title>Book Issue</title>
-  </head>
-    
+  </head>  
     <body>
-
 <?php
 session_start();
 $bid=$_POST['bookid'];
@@ -26,18 +23,13 @@ $con1=mysqli_connect("localhost","root","","books");
 $q1=mysqli_query($con1,"SELECT * FROM bookdetails WHERE book_id=$bid");
 while($row=mysqli_fetch_array($q1))
 {
-    if($row[3]==NULL || $row[3]==0)
+    if($row[3]=='NO')
     {
-        echo '<div class="alert alert-danger" role="alert">';
-        printf("<strong>Zero copies available!</strong>\n");
-        printf("Not possible to issue book!\n");
-        echo '</div><br>';
         $bid='terminate';
         $_SESSION['bookid']=$bid;
         exit();
     }
-    $row[3]=$row[3]-1;
-    $e1=mysqli_query($con1,"UPDATE bookdetails SET no_of_books='$row[3]' WHERE book_id=$bid");
+    $e1=mysqli_query($con1,"UPDATE bookdetails SET avail='NO' WHERE book_id=$bid");
     if (!$e1) 
     {
         echo '<div class="alert alert-danger" role="alert">';
@@ -47,8 +39,7 @@ while($row=mysqli_fetch_array($q1))
     }
     echo '<div class="alert alert-success" id="success" role="alert">';
     printf("Book db update success!\n");
-    echo '</div><br>';
-    
+    echo '</div><br>'; 
 }
 $_SESSION['bookid']=$bid;
 ?>

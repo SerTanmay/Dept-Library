@@ -20,7 +20,17 @@
             window.history.back();
         }
     </script>
-      
+    <style>
+        body {
+            padding: 40px 15px;
+            text-align: center;
+            background-color: #eee;
+        }
+        table.center {
+            margin-left:55%; 
+            margin-right:35%;
+        }
+    </style>  
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="bootstrap-3.3.7/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
@@ -73,7 +83,7 @@ if(! $con )
     die("<strong>Could not connect:</strong> " . mysqli_connect_error());
     echo "<br></div>";
 } 
-$q=mysqli_query($con,"CREATE OR REPLACE VIEW books_view AS SELECT * FROM bookdetails");
+$q=mysqli_query($con,"CREATE OR REPLACE VIEW books_view AS SELECT * FROM bookdetails ORDER BY book_name ASC,book_id ASC");
 if (!$q) 
 {
     echo '<div class="alert alert-danger" role="alert">';
@@ -82,13 +92,13 @@ if (!$q)
 }
 $c=mysqli_query($con,"SELECT * FROM books_view");
 echo '<div class="col-md-6">
-          <table class="table table-striped table-bordered">
+          <table class="table center table-striped table-bordered">
             <thead>
               <tr>
                 <th>Book ID</th>
                 <th>Book Name</th>
                 <th>Author</th>
-                <th>No. of books</th>
+                <th>Available</th>
               </tr>
             </thead>
             <tbody>';

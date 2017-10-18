@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="1; url=memreturn.php">
+    <meta http-equiv="refresh" content="1; url=latefeememreturn.php">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
     <script type="text/javascript">
-        window.location.href = "memreturn.php"
+        window.location.href = "latefeememreturn.php"
     </script>
 
     <title>Book Return</title>
@@ -19,13 +19,15 @@
  
 <?php
 session_start();
-$bid=$_POST['bookid'];
+$mid=$_POST['mid'];
+$bid=$_POST['bid'];
 $con1=mysqli_connect("localhost","root","","books");
 
 //Updating books database
 $q1=mysqli_query($con1,"SELECT * FROM bookdetails WHERE book_id=$bid");
-if(!q1)
+if(!$q1)
 {
+    echo 'Wrong book id';
     $bid='terminate';
     $_SESSION['bookid']=$bid;
     exit();
@@ -41,9 +43,11 @@ while($row=mysqli_fetch_array($q1))
         exit();
     }
     printf("Book db update success!\n");
+    echo '<a href="latefeememreturn.php">Continue!</a>';
     echo '<br>';
 }
 $_SESSION['bookid']=$bid;
+$_SESSION['mem_id']=$mid;
 ?>
     </body>
 </html>
